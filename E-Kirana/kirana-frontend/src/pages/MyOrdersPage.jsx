@@ -80,7 +80,7 @@ const MyOrdersPage = () => {
                                                 {order.orderItems.map(item => (
                                                     <li key={item.id} className="py-3 flex justify-between items-center">
                                                         <div>
-                                                            <p className="font-medium text-gray-800">{item.product?.name || 'Product not available'}</p>
+                                                            <p className="font-medium text-gray-800">{item.productName || 'Product not available'}</p>
                                                             <p className="text-sm text-gray-500">Qty: {item.quantity}</p>
                                                         </div>
                                                         <p className="font-medium text-gray-800">
@@ -92,6 +92,7 @@ const MyOrdersPage = () => {
                                         ) : (
                                             <p>No items found for this order.</p>
                                         )}
+
                                     </div>
                                 )}
                             </li>

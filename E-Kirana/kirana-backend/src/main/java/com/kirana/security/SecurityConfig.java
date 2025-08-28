@@ -81,7 +81,7 @@ public class SecurityConfig {
 
                 // Orders: admin endpoints
                 auth.requestMatchers(HttpMethod.GET, "/orders").hasRole("ADMIN");
-                auth.requestMatchers(HttpMethod.PUT, "/orders/**/status").hasRole("ADMIN");
+                auth.requestMatchers(HttpMethod.PUT, "/orders/*/status").hasRole("ADMIN");
                 auth.requestMatchers(HttpMethod.DELETE, "/orders/**").hasRole("ADMIN");
 
                 // Secure all admin endpoints

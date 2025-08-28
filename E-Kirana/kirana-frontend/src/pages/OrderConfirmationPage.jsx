@@ -18,6 +18,8 @@ const OrderConfirmationPage = () => {
             try {
                 const orderData = await getOrderById(orderId);
                 setOrder(orderData);
+
+                console.log(orderData);
             } catch (err) {
                 setError('Could not load your order details. Please contact support.');
                 console.error(err);
