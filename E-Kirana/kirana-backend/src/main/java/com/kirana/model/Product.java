@@ -29,6 +29,14 @@ public class Product {
 
     private String imageUrl;
 
+    // NEW fields to support featured products, ratings and promotions
+    private Double oldPrice;
+    private Boolean featured = false;
+    private Double rating = 0.0;
+    private Integer reviewsCount = 0;
+    private Boolean bestseller = false;
+    private Boolean isNew = false;
+
     public Product() {}
 
     // Constructor used by the DataSeeder
@@ -62,4 +70,23 @@ public class Product {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    // NEW getters/setters
+    public Double getOldPrice() { return oldPrice; }
+    public void setOldPrice(Double oldPrice) { this.oldPrice = oldPrice; }
+
+    public Boolean getFeatured() { return featured; }
+    public void setFeatured(Boolean featured) { this.featured = featured; }
+
+    public Double getRating() { return rating; }
+    public void setRating(Double rating) { this.rating = rating; }
+
+    public Integer getReviewsCount() { return reviewsCount; }
+    public void setReviewsCount(Integer reviewsCount) { this.reviewsCount = reviewsCount; }
+
+    public Boolean getBestseller() { return bestseller; }
+    public void setBestseller(Boolean bestseller) { this.bestseller = bestseller; }
+
+    public Boolean getIsNew() { return isNew; }
+    public void setIsNew(Boolean isNew) { this.isNew = isNew; }
 }

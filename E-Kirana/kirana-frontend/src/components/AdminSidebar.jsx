@@ -21,6 +21,7 @@ const AdminSidebar = () => {
                 <NavLink to="/admin/products" className={({ isActive }) => `block px-4 py-2 rounded transition-colors ${isActive ? 'bg-indigo-600' : 'hover:bg-gray-800'}`}>Products</NavLink>
                 <NavLink to="/admin/users" className={({ isActive }) => `block px-4 py-2 rounded transition-colors ${isActive ? 'bg-indigo-600' : 'hover:bg-gray-800'}`}>Users</NavLink>
                 <NavLink to="/admin/orders" className={({ isActive }) => `block px-4 py-2 rounded transition-colors ${isActive ? 'bg-indigo-600' : 'hover:bg-gray-800'}`}>Orders</NavLink>
+                <NavLink to="/admin/reports" className={({ isActive }) => `block px-4 py-2 rounded transition-colors ${isActive ? 'bg-indigo-600' : 'hover:bg-gray-800'}`}>Reports</NavLink>
             </nav>
             <div className="px-4 pb-6">
                 <div className="mb-2 text-sm text-gray-400">Logged in as: <span className="font-semibold text-white">{currentUser?.name || 'Admin'}</span></div>

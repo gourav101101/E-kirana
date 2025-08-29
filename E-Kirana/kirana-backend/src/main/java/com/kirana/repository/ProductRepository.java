@@ -33,4 +33,7 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // For the low stock report
     List<Product> findByStockLessThan(int threshold);
 
+    // NEW: find featured products (for homepage carousel)
+    List<Product> findByFeaturedTrueOrderByIdDesc();
+
 }

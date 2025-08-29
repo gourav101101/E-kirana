@@ -2,6 +2,8 @@ package com.kirana.controller;
 
 import com.kirana.model.Product;
 import com.kirana.service.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -9,14 +11,42 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/products")
 public class ProductController {
 
+    private static final Logger log = LoggerFactory.getLogger(ProductController.class);
+
     @Autowired
     private ProductService productService;
+
+    // NEW: return featured products for homepage carousel (defensive - catches errors and returns empty list on failure)
+    @GetMapping("/featured")
+    public ResponseEntity<List<Product>> getFeaturedProducts() {
+        try {
+            List<Product> featured = productService.getFeaturedProducts();
+            return ResponseEntity.ok(featured);
+        } catch (Exception ex) {
+            // Log full stacktrace and return empty list to avoid 500 on frontend
+            log.error("Failed to load featured products", ex);
+            return ResponseEntity.ok(Collections.emptyList());
+        }
+    }
+
+    // NEW: return rating info for a product
+    @GetMapping("/{id}/rating")
+    public ResponseEntity<Map<String, Object>> getProductRating(@PathVariable Long id) {
+        Product p = productService.getProductById(id);
+        if (p == null) return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(Map.of(
+                "rating", p.getRating(),
+                "reviewsCount", p.getReviewsCount()
+        ));
+    }
 
     /**
      * The main endpoint for listing products.

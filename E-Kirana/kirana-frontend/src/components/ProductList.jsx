@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getProducts } from '../services/productService';
 import ProductCard from './ProductCard';
+import ProductSkeleton from './ProductSkeleton';
 
 const ProductList = ({ category, searchQuery }) => {
     const [products, setProducts] = useState([]);
@@ -26,7 +27,14 @@ const ProductList = ({ category, searchQuery }) => {
     }, [category, searchQuery]); // Re-run the effect when category or searchQuery changes
 
     if (loading) {
-        return <div className="text-center py-10">Loading products...</div>;
+        // show a grid of skeleton loaders to indicate content
+        return (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {Array.from({ length: 8 }).map((_, i) => (
+                    <ProductSkeleton key={`skel-${i}`} />
+                ))}
+            </div>
+        );
     }
 
     if (error) {
@@ -34,7 +42,12 @@ const ProductList = ({ category, searchQuery }) => {
     }
 
     if (products.length === 0) {
-        return <div className="text-center py-10 text-gray-500">No products found.</div>;
+        return (
+            <div className="text-center py-10 text-gray-500">
+                <p className="mb-3">No products found.</p>
+                <a href="#" className="text-indigo-600 hover:underline">Try clearing filters or check other categories</a>
+            </div>
+        );
     }
 
     return (

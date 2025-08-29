@@ -20,6 +20,11 @@ export const getProductById = async (id) => {
     return response.data;
 };
 
+export const getFeaturedProducts = async () => {
+    const response = await apiClient.get('/products/featured');
+    return response.data;
+};
+
 // --- MANAGE DATA ---
 
 export const createProduct = async (productData) => {

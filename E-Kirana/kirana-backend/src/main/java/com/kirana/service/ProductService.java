@@ -42,6 +42,16 @@ public class ProductService {
         return productRepository.findDistinctCategories();
     }
 
+    public List<Product> getAllCategoriesList() {
+        // placeholder if needed
+        return productRepository.findAll();
+    }
+
+    // NEW: return featured products for the homepage carousel
+    public List<Product> getFeaturedProducts() {
+        return productRepository.findByFeaturedTrueOrderByIdDesc();
+    }
+
     // --- Standard CRUD and Utility Methods ---
 
     public Product addProduct(Product product) {

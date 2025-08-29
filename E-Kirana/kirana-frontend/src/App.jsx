@@ -15,6 +15,7 @@ import AdminProductPage from './pages/AdminProductPage.jsx';
 import AdminOrderPage from './pages/AdminOrderPage.jsx';
 import AdminUserPage from './pages/AdminUserPage.jsx';
 import ProductDetailPage from './pages/ProductDetailPage.jsx';
+import AdminReports from './pages/AdminReports'; // NEW
 
 // Layout and Route Protection Imports
 import UserLayout from './components/UserLayout.jsx';
@@ -49,6 +50,7 @@ function App() {
                 <Route element={<AdminRoute />}>
                     <Route path="/admin" element={<AdminLayout />}>
                         <Route path="dashboard" element={<AdminDashboard />} />
+                        <Route path="reports" element={<AdminReports />} />
                         <Route path="products" element={<AdminProductPage />} />
                         <Route path="users" element={<AdminUserPage />} />
                         <Route path="orders" element={<AdminOrderPage />} />

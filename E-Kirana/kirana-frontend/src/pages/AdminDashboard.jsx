@@ -31,6 +31,12 @@ const AdminDashboard = () => {
                     <h3 className="text-xl font-semibold text-indigo-600">Manage Users</h3>
                     <p className="mt-2 text-gray-600">View, add, edit, and remove users.</p>
                 </Link>
+
+                {/* Overall Reports Card (NEW) */}
+                <Link to="/admin/reports" className="block p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+                    <h3 className="text-xl font-semibold text-indigo-600">Overall Reports</h3>
+                    <p className="mt-2 text-gray-600">View sales summary, top products, low stock alerts, charts and export to Excel.</p>
+                </Link>
             </div>
         </>
     );
