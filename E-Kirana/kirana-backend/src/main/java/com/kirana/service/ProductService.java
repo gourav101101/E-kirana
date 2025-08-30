@@ -70,6 +70,17 @@ public class ProductService {
             product.setCategory(updatedProduct.getCategory());
             product.setDescription(updatedProduct.getDescription());
             product.setImageUrl(updatedProduct.getImageUrl());
+            // New fields: ensure update includes promotions, ratings and images
+            product.setOldPrice(updatedProduct.getOldPrice());
+            product.setFeatured(updatedProduct.getFeatured() != null ? updatedProduct.getFeatured() : false);
+            product.setRating(updatedProduct.getRating() != null ? updatedProduct.getRating() : 0.0);
+            product.setReviewsCount(updatedProduct.getReviewsCount() != null ? updatedProduct.getReviewsCount() : 0);
+            product.setBestseller(updatedProduct.getBestseller() != null ? updatedProduct.getBestseller() : false);
+            product.setIsNew(updatedProduct.getIsNew() != null ? updatedProduct.getIsNew() : false);
+            // Replace images list if provided
+            if (updatedProduct.getImages() != null) {
+                product.setImages(updatedProduct.getImages());
+            }
             return productRepository.save(product);
         }).orElse(null);
     }
