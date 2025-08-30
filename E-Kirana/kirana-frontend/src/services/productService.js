@@ -3,11 +3,17 @@ import apiClient from './api';
 // --- FETCH DATA ---
 
 export const getProducts = async (category, name) => {
-    const params = new URLSearchParams();
-    if (category) params.append('category', category);
-    if (name) params.append('name', name);
-    const response = await apiClient.get(`/products?${params.toString()}`);
-    return response.data.content;
+    try {
+        const params = new URLSearchParams();
+        if (category) params.append('category', category);
+        if (name) params.append('name', name);
+        const response = await apiClient.get(`/products?${params.toString()}`);
+        return response.data.content;
+    } catch (err) {
+        console.error('getProducts error:', err);
+        // Return empty list so UI can continue while backend is being fixed
+        return [];
+    }
 };
 
 export const getCategories = async () => {
@@ -21,8 +27,13 @@ export const getProductById = async (id) => {
 };
 
 export const getFeaturedProducts = async () => {
-    const response = await apiClient.get('/products/featured');
-    return response.data;
+    try {
+        const response = await apiClient.get('/products/featured');
+        return response.data || [];
+    } catch (err) {
+        console.error('getFeaturedProducts error:', err);
+        return [];
+    }
 };
 
 // --- MANAGE DATA ---

@@ -50,6 +50,40 @@ public class DataSeeder implements CommandLineRunner {
 
         productRepository.saveAll(demoProducts);
         System.out.println("Database seeded with " + demoProducts.size() + " Indian Kirana products.");
+        seedAdditionalProducts();
+    }
+
+    private void seedAdditionalProducts() {
+        try {
+            long count = productRepository.count();
+            if (count > 0) {
+                System.out.println("Database already contains products (count: " + count + "), skipping additional seeding.");
+                return;
+            }
+
+            Product p1 = new Product("Test Mango Pack", 249.99, 50, "Fruits", "Fresh mangoes, 1kg pack.", "https://via.placeholder.com/600x400.png?text=Mango");
+            p1.setOldPrice(299.99);
+            p1.setFeatured(true);
+            p1.setBestseller(true);
+            p1.setIsNew(true);
+            p1.setRating(4.6);
+            p1.setReviewsCount(12);
+            p1.setImages(List.of("https://via.placeholder.com/300x300.png?text=Mango1","https://via.placeholder.com/300x300.png?text=Mango2"));
+
+            Product p2 = new Product("Organic Spinach", 49.99, 120, "Vegetables", "Fresh organic spinach bunch.", "https://via.placeholder.com/600x400.png?text=Spinach");
+            p2.setFeatured(true);
+            p2.setRating(4.3);
+            p2.setReviewsCount(5);
+            p2.setImages(List.of("https://via.placeholder.com/300x300.png?text=Spinach1"));
+
+            Product p3 = new Product("Cow Milk 1L", 59.99, 80, "Dairy", "Full cream milk 1 liter.", "https://via.placeholder.com/600x400.png?text=Milk");
+            p3.setImages(List.of("https://via.placeholder.com/300x300.png?text=Milk1"));
+
+            productRepository.saveAll(List.of(p1, p2, p3));
+            System.out.println("Seeded additional sample products.");
+        } catch (Exception ex) {
+            System.err.println("Failed to seed additional products: " + ex.getMessage());
+        }
     }
 
     private void seedAdminUserIfMissing() {

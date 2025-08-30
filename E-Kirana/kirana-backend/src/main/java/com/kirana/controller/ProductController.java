@@ -53,11 +53,17 @@ public class ProductController {
      * Supports pagination, sorting, and filtering by name and/or category.
      */
     @GetMapping
-    public Page<Product> listProducts(
+    public ResponseEntity<Page<Product>> listProducts(
             @org.springframework.data.web.PageableDefault(size = 12, sort = "id", direction = Sort.Direction.DESC) Pageable pageable,
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String category) {
-        return productService.search(name, category, pageable);
+        try {
+            Page<Product> page = productService.search(name, category, pageable);
+            return ResponseEntity.ok(page);
+        } catch (Exception ex) {
+            log.error("Error listing products", ex);
+            return ResponseEntity.ok(Page.empty());
+        }
     }
 
     /**
